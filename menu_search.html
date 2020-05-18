@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <style>
+            html{
+                width:100%;
+                height:100%;
+            }
+            body{
+                height:100%;
+                width:100%;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                background-color : pink;
+
+            }
+            h1{
+                text-align:center;
+                font-size:100px;
+            }
+            #main{
+                position:relative;
+                width : 70%;
+                height : 50%;
+                background-color:brown;
+            }
+            p{
+                text-align:center;
+                font-size:30px;
+                color:yellow;
+                background-color:blue;
+            }
+            form{
+                position:absolute;
+                width:60%;
+                height:70%;
+                top:15%;
+                left:20%;
+
+            }
+            #inputs{
+                position:absolute;
+                left:10%;
+            }
+            input[type=text]{
+                width:50%;
+                height:30%;
+                font-size:70px;
+
+            }
+            input[type=submit]{
+                background-color:blue;
+                color:cyan;
+                width:100px;
+                height:50px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>메뉴 검색</h1>
+        <div id = "main">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <p>검색할 식당의 메뉴를 입력하세요.</p>
+                <div id="inputs">
+                <input type="text" name="menu_name" placeholder="메뉴입력">
+                <input type="submit">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

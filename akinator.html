@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>this is akinator</h1>
+        <p>{{yes}}         {{no}}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button name="yes" value="1">YES</button>
+            <button name="no" value="2">NO</button>
+            <button name="reset" value="3">RESET</button>
+        </form>
+    </body>
+</html>
