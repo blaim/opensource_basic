@@ -1,9 +1,12 @@
 <html>
     <head>
         <style>
+            @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
             html{
                 width:100%;
                 height:100%;
+                font-family: 'Hanna', sans-serif;
             }
             body{
                 height:100%;
@@ -12,7 +15,7 @@
                 flex-direction:column;
                 align-items:center;
                 background-color : pink;
-
+                border-style:none;
             }
             h1{
                 text-align:center;
@@ -22,38 +25,72 @@
                 position:relative;
                 width : 70%;
                 height : 50%;
-                background-color:brown;
+                background-color:#385F71;
             }
-            p{
+            form p{
                 text-align:center;
                 font-size:30px;
                 color:yellow;
-                background-color:blue;
+                border-radius:30px;
+                background-color:#037365;
+                width:100%;
             }
             form{
                 position:absolute;
-                width:60%;
+                width:70%;
                 height:70%;
                 top:15%;
-                left:20%;
+                transform:translate(25%);
 
             }
             #inputs{
                 position:absolute;
-                left:10%;
-            }
-            input[type=text]{
-                width:50%;
-                height:30%;
-                font-size:70px;
+                width:100%
 
             }
+            input[type=text]{
+
+                width:30%;
+                height:100%;
+                font-size:60px;
+                border-radius:2px;
+                border-bottom:5px solid white;
+                transition: border 1s, background-color 1s, color 1s, width 2s;
+
+            }
+            input[type=text]:focus{
+                border-bottom:5px solid #ff585d;
+                background-color:#b9ce4a;
+                color:#f2eb69;
+                width : 100%;
+
+            }
+            input[type=text]:focus+input[type=submit]{
+                width:100%;
+            }
+
             input[type=submit]{
                 background-color:blue;
                 color:cyan;
-                width:100px;
-                height:50px;
+                display:block;
+                width:30%;
+                height:40px;
+                transition:width 2s;
             }
+            input:focus::placeholder{
+                opacity:0;
+            }
+            #footer{
+			position:fixed;
+			width:100%;
+			background-color:#a64942;
+			bottom:0;
+		}
+		#footer p{
+			padding:0px 20px;
+			text-align:right;
+
+		}
 
         </style>
 
@@ -65,10 +102,13 @@
                 {% csrf_token %}
                 <p>검색할 식당의 메뉴를 입력하세요.</p>
                 <div id="inputs">
-                <input type="text" name="menu_name" placeholder="메뉴입력">
-                <input type="submit">
+                <input type="text" name="menu_name" placeholder="메뉴입력" autocomplete="off">
+                <input type="submit" value="검색">
                 </div>
             </form>
+        </div>
+        <div id="footer">
+            <p>CBNU opensource</p>
         </div>
     </body>
 </html>

@@ -1,0 +1,131 @@
+<html>
+	<head>
+			<style>
+					body{
+						background-color:pink;
+						text-align:center;
+						padding:0px 20px;
+						margin:0px;
+					}
+					#mainbox{
+							justify-content:center;
+							width:100%;
+							height:100%;
+							display:grid;
+							background-color:pink;
+							margin:0px;
+							grid-template-columns : 16% 16% 16% 16% 16% 16%;
+							grid-template-rows : 16% 16% 16% 16% 16% 16%;
+							grid-gap:10px;
+							overflow:hidden;
+					}
+					div div{
+						background-color : black;
+						color:white;
+						border-radius:100px;
+
+
+					}
+
+					#res_name{
+						grid-column-start:1;
+						grid-column-end:7;
+					}
+
+					#res_pos{
+						grid-column-start:1;
+						grid-column-end:3;
+						grid-row-start:2;
+						grid-row-end:6;
+					}
+
+					#res_map{
+						grid-column-start:3;
+						grid-column-end:6;
+						grid-row-start:2;
+						grid-row-end:6;
+						width:100%;
+						height:100%;
+						background-color:pink;
+						border-radius:100px;
+						transition:width 2s, height:2s;
+						padding:0px;
+						position:relative;
+					}
+
+
+
+					#res_price{
+						grid-column-start:6;
+						grid-column-end:7;
+						grid-row-start:2;
+						grid-row-end:3;
+					}
+
+					#res_menu{
+						grid-column-start:6;
+						grid-column-end:7;
+						grid-row-start:3;
+						grid-row-end:6;
+					}
+
+					#res_site{
+						grid-column-start:1;
+						grid-column-end:7;
+						grid-row-start:6;
+						grid-row-end:7;
+					}
+					#res_map iframe{
+						width:100%;
+						height:90%;
+						border-radius:100px;
+						margin:0px;
+
+					}
+
+					#big_map{
+						width:100%;
+						height:10%;
+						background-color:blue;
+						border-radius:100px;
+
+					}
+			</style>
+	</head>
+	<body>
+			<div id="mainbox">
+					<div id="res_name">식당이름</div>
+					<div id="res_pos">식당위치</div>
+					<div id="res_map">
+							<button id="big_map" onclick="big_map()">전체화면으로</button>
+							<iframe src="https://heropy.blog/">
+							</iframe>
+					</div>
+
+					<div id="res_price">식당가격대</div>
+					<div id="res_menu">식당메뉴</div>
+					<div id="res_site">웹사이트이동</div>
+			</div>
+
+	<script>
+			var is_big = 0;
+
+			function big_map()
+			{
+				if(is_big==0)
+				{
+					is_big = 1;
+					document.getElementById("res_map").style.position = "absolute";
+					document.getElementById("big_map").innerHTML = "작은화면으로";
+
+				}
+				else
+				{
+					is_big = 0;
+					document.getElementById("res_map").style.position = "static";
+					document.getElementById("big_map").innerHTML = "전체화면으로";
+				}
+			}
+	</script>
+	</body>
+</html>

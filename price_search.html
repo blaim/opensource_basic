@@ -1,9 +1,11 @@
 <html>
     <head>
         <style>
+            @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
             html{
                 width:100%;
                 height:100%;
+                font-family: 'Hanna', sans-serif;
             }
             body{
                 height:100%;
@@ -22,13 +24,15 @@
                 position:relative;
                 width : 70%;
                 height : 50%;
-                background-color:brown;
+                background-color:#385F71;
             }
-            p{
+            form p{
                 text-align:center;
                 font-size:30px;
                 color:yellow;
-                background-color:blue;
+                border-radius:30px;
+                background-color:#037365;
+                width:70%;
             }
             form{
                 position:absolute;
@@ -43,10 +47,12 @@
                 left:10%;
             }
             input[type=text]{
+                border-radius:100px;
                 width:50%;
                 height:30%;
                 font-size:70px;
-
+                border:5px solid black;
+                transition:background-color 1s, border 1s;
             }
             input[type=submit]{
                 background-color:blue;
@@ -54,6 +60,29 @@
                 width:100px;
                 height:50px;
             }
+
+            input[type=text]:focus{
+                border-bottom:5px solid #ff585d;
+                background-color:#b9ce4a;
+                color:#f2eb69;
+
+            }
+
+            input:focus::placeholder{
+                opacity:0;
+            }
+
+             #footer{
+			position:fixed;
+			width:100%;
+			background-color:#a64942;
+			bottom:0;
+		}
+		#footer p{
+			padding:0px 20px;
+			text-align:right;
+			text
+		}
 
         </style>
 
@@ -65,11 +94,14 @@
                 {% csrf_token %}
                 <p>검색할 식당의 가격 범위를 입력하세요</p>
                 <div id="inputs">
-                <input type="text" name="min_number" placeholder="최소가격">
-                <input type="text" name="max_number" placeholder="최대가격">
+                <input type="text" name="min_number" placeholder="최소가격" autocomplete="off">
+                <input type="text" name="max_number" placeholder="최대가격" autocomplete="off">
                 <input type="submit">
                 </div>
             </form>
+        </div>
+        <div id="footer">
+            <p>CBNU opensource</p>
         </div>
     </body>
 </html>

@@ -2,102 +2,184 @@
 <head>
 <title>first django project</title>
 	<style>
+			@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+		html{
+			font-family: 'Hanna', sans-serif;
+		}
 		body{
 			background-color:pink;
 			margin:10px;
 		}
 		#header{
 			text-align:center;
-			background-color:red;
-			color:blue;
+			background-color:#343434;
+			color:#d53bae;
 			font-size:100px;
 			border-bottom:3px dotted black;
-		}
-		li{
-			float:left;
-			width:250px;
-			height:200px;
-			list-style:none;
-			text-align:center;
-			border:solid 5px black;
-			border-radius:25px;
-			margin:10px;
-			padding:0px 50px;
-			color:yellow;
-			background-color:blue;
-			line-height:200px;
-			}
-		li a{
-			width:100%;
-			color:yellow;
-			text-decoration:none;
-			font-size:40px;
-			display:block;
+			max-height:40%;
+
 		}
 
 		#menus{
 			float:left;
 			width:100%;
-			height:300px;
-			background-color:green;
+			height:80%;
+			background-color:#db50b0;
+
 		}
-		#form_div{
+		ul{
+			height:100%;
 			width:100%;
-			float:left;
-			height:200px;
-			background-color:black;
-			padding: 10px 600px;
+			padding:0px;
 		}
+		li{
+			width:90%;
+			height:15%;
+			list-style:none;
+			text-align:center;
+			border:solid 5px black;
+			border-radius:100px;
+			margin:10px auto;
 
-		#form_div p{
-			float:left;
-			height:50px;
-			color:white;
+			color:#fff1ac;
+			background-color:#6b48ff;
+
+			}
+		li a{
+			border-radius:25px;
+			width:100%;
+			height:100%;
+			color:yellow;
+			text-decoration:none;
 			font-size:40px;
-
-		}
-		#form_div form{
-			float:left;
-			margin:0px;
-			width:400px;
-
-		}
-		input[type=text]{
-			float:left;
-			width:200px;
-			height:50px;
-			font-size:30px;
-			border:2px solid red;
 			display:block;
+			line-height:100px;
 		}
-		input[type=submit]{
-			float:left;
-			width:50px;
+		li:hover{
+			background-color:#3d1020;
+			color:#c3f5e1;
+		}
+		#footer{
+			position:fixed;
+			width:100%;
+			overflow:hidden;
+			background-color:#a64942;
+			bottom:0;
+
+		}
+		#footer p{
+			padding:0px 20px;
+			text-align:right;
+
+		}
+
+		#footer button{
 			height:50px;
+			width:50px;
+			position:absolute;
+			bottom:0px;
+			background-color:black;
+			color:yellow;
+			font-size:30px;
+			font-weight:bold;
+
 		}
+
+		#ques_field{
+			width:100%;
+			height:10%;
+			z-index=1;
+			background-color:#5BE7C4;
+			color:#334252;
+			font-size:30px;
+			text-align:center;
+			position:fixed;
+			top:0px;
+			left:0px;
+			display:none;
+			line-height:100px;
+		}
+
+
 	</style>
+
+
 	</head>
 	<body>
-
+		<div id="ques_field"></div>
 		<div id="header">메뉴 선택하세요</div>
 		<div id="menus">
 			<ul>
-				<li><a href="/akinator">아키네이터</a></li>
-				<li><a href="/ressearch">식당이름검색</a></li>
-				<li><a href="/mnsearch">식당메뉴검색</a></li>
-				<li><a href="/prsearch">가격대검색</a></li>
+
+				<li><a href="/akinator" onmouseover = "question(0)"
+					   onmouseout="clears()" >아키네이터</a></li>
+				<li><a href="/ressearch" onmouseover = "question(1)"
+					   onmouseout="clears()">식당이름검색</a></li>
+				<li><a href="/mnsearch" onmouseover = "question(2)"
+					   onmouseout="clears()">식당메뉴검색</a></li>
+				<li><a href="/prsearch" onmouseover = "question(3)"
+					   onmouseout="clears()">가격대검색</a></li>
+				<li><a href="/add_del" onmouseover = "question(4)"
+					   onmouseout="clears()">식당 추가/ 삭제</a></li>
 			</ul>
-		</div>
-		<div id="form_div">
-		<form action="#" method="post">
-			{% csrf_token %}
-			<p>input your answer</p>
-			<input type="text" name="menu">
-			<input type="submit" value="OK">
-		</form>
+			<div id="footer">
+				<button id="ques" onclick="ques_pushed()">?</button>
+				<p>CBNU opensource</p>
+			</div>
 		</div>
 
 
 
+	<script>
+		question_pushed = 0;
+
+		function ques_pushed(){
+			if(question_pushed == 0)
+			{
+				document.getElementById("ques").style.backgroundColor="blue";
+				question_pushed = 1;
+			}
+			else
+			{
+				document.getElementById("ques").style.backgroundColor="black";
+				question_pushed = 0;
+			}
+		}
+
+
+
+		function question(number){
+			if(question_pushed == 1)
+			{
+			document.getElementById("ques_field").style.display="block";
+
+			if(number == 0)
+			{
+			document.getElementById("ques_field").innerHTML = "질문을 통해 원하는 식당을 출력합니다";
+			}
+			else if(number == 1)
+			{
+			document.getElementById("ques_field").innerHTML = "식당의 이름을 입력받아 검색합니다";
+			}
+			else if(number == 2)
+			{
+			document.getElementById("ques_field").innerHTML = "찾고싶은 메뉴를 입력받아 검색합니다";
+			}
+			else if(number == 3)
+			{
+			document.getElementById("ques_field").innerHTML = "원하는 식당의 평균 가격대를 검색합니다";
+			}
+			else if(number == 4)
+			{
+			document.getElementById("ques_field").innerHTML = "수정이 필요한 식당을 관리자에게 전송합니다다";			}
+
+			}
+		}
+
+		function clears(){
+				document.getElementById("ques_field").style.display="none";
+		}
+
+	</script>
 	</body>
 </html>

@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Price result</title>
+    <style>
+            @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+            html{
+                width:100%;
+                height:100%;
+                font-family: 'Hanna', sans-serif;
+                scroll-behavior:smooth;
+            }
+        body{
+            background-color:pink;
+        }
+        h1{
+            background-color:#F43E71;
+            width:100%;
+            height:200px;
+            text-align:center;
+            font-size:80px;
+            line-height:200px;
+        }
+        p{
+            background-color:blue;
+            color:yellow;
+            font-size:30px;
+            margin:10px auto;
+            text-align:center;
+            width:50%;
+            height:100px;
+            line-height:100px;
+        }
+
+        input[type=button]{
+            width:32%;
+            height:10%;
+            background-color:#d5a4cf;
+            color:#f9bcdd;
+            font-size:30px;
+            margin:100px auto;
+        }
+
+        #move{
+
+            position:fixed;
+            bottom:0px;
+            right:0px;
+            width:100px;
+            height:50px;
+        }
+        #move button{
+            padding:0px;
+            float:left;
+            font-size:35px;
+            width:50%;
+            height:100%;
+
+        }
+        #move button a{
+            width:100%;
+            height:100%;
+            margin:0px;
+            text-decoration:none;
+            display:block;
+            background-color:white;
+            color:green;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <h1 id="top">식당 리스트</h1>
+    {% for p in results %}
+
+
+
+    <p>{{p}}</p>
+
+    {% endfor %}
+
+    <form method="post">
+        {% csrf_token %}
+        <button id="map" name="to_map" value="map" >지도로 출력</button>
+    </form>
+    <button  onclick="location.href='./'">식당이름 다시검색</button>
+    <button  onclick="location.href='../'">메인 메뉴로</button>
+    <div id="move">
+        <button id="to_up"><a href="#top">▲</a></button>
+        <button id="to_down"><a href="#map">▼</a></button>
+    </div>
+
+</body>
+</html>
