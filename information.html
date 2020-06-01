@@ -1,0 +1,263 @@
+<!--  made by 임경수 -->
+<html>
+	<head>
+			<style>
+					*{
+						padding:0px;
+						margin:0px;
+					}
+					body{
+
+						background-color:pink;
+						text-align:center;
+
+
+					}
+					#mainbox{
+							justify-content:center;
+							width:90%;
+							height:90%;
+							display:grid;
+							background-color:pink;
+							margin:0px;
+							grid-template-columns : 16% 16% 16% 16% 16% 16%;
+							grid-template-rows : 16% 16% 16% 16% 16% 16%;
+							grid-gap:10px;
+							overflow:hidden;
+							padding:20px;
+					}
+					div div{
+						background-color : #08ffc8;
+						border:2px black solid;
+						border-radius:100px;
+						color:#204969;
+
+					}
+
+					#res_name{
+						grid-column-start:1;
+						grid-column-end:5;
+
+					}
+
+					#res_name p{
+
+						width:100%;
+						height:100%;
+						font-size:4vw;
+						font-weight:bold;
+						line-height:100px;
+					}
+
+					#phone{
+						grid-column-start:5;
+						grid-column-end:7;
+					}
+					#phone p{
+
+						font-size:3vw;
+						font-weight:bold;
+						line-height:100px;
+					}
+
+					#grade{
+						grid-column-start:1;
+						grid-column-end:6;
+						grid-row-start:2;
+						grid-row-end:3;
+					}
+					#review{
+						grid-column-start:1;
+						grid-column-end:4;
+						grid-row-start:3;
+						grid-row-end:6;
+						position:relative;
+						width:100%;
+						height:100%;
+					}
+
+					#write_review
+					{
+						grid-column-start:4;
+						grid-column-end:6;
+						grid-row-start:3;
+						grid-row-end:6;
+
+					}
+
+
+
+					#res_price{
+						grid-column-start:6;
+						grid-column-end:7;
+						grid-row-start:2;
+						grid-row-end:3;
+					}
+
+					#res_price p {
+						font-size:3vw;
+						font-weight:bold;
+						line-height:100px;
+					}
+
+					#res_menu{
+						border-radius:0px;
+						grid-column-start:6;
+						grid-column-end:7;
+						grid-row-start:3;
+						grid-row-end:6;
+						overflow:auto;
+					}
+
+					#res_menu p{
+						background-color:#dadada;
+						width:100%;
+						height:15%;
+						font-size:2vw;
+						border-bottom:4px black solid;
+
+					}
+
+					#res_site{
+						grid-column-start:1;
+						grid-column-end:7;
+						grid-row-start:6;
+						grid-row-end:7;
+					}
+
+					#res_site>a{
+						text-decoration:none;
+						width:100%;
+						height:100%;
+						font-size:5vw;
+						color:#204969;
+						display:block;
+						border-radius:100px;
+					}
+
+					#res_site>a:hover{
+						background-color:yellow;
+					}
+
+
+
+
+					#big_map{
+						width:100%;
+						height:10%;
+						background-color:blue;
+						border-radius:100px;
+
+					}
+
+					#footer{
+						position:fixed;
+						width:100%;
+						overflow:hidden;
+						background-color:#a64942;
+						bottom:0;
+						height:5%;
+
+
+		}
+
+		#write_review form{
+			width:80%;
+			height:80%;
+			margin:0px auto;
+		}
+
+		input[type=textfield]{
+			display:block;
+			width:100%;
+			height:100%;
+
+		}
+
+		input[type=submit]{
+			width:100%;
+
+		}
+
+		input[type=text]{
+			display:none;
+		}
+
+		#footer a{
+			margin:0px 20px;
+			text-decoration:overline underline;
+			height:100%;
+			width:10%;
+			color:yellow;
+			top:20px;;
+		}
+
+		#footer a:hover{
+			color:black;
+		}
+
+			</style>
+	</head>
+	<body>
+			<div id="mainbox">
+					<div id="res_name"><p>{{information.2}}</p></div>
+					<div id="phone"><p>{{information.4}}</p></div>
+					<div id="grade"><p>평점</p></div>
+					<div id="review">
+						<button id="big_map" onclick="big_map()">전체화면으로</button>
+						<p>리뷰</p>
+					</div>
+
+					<div id="write_review">
+						<form method="post">
+							{% csrf_token %}
+							<input type="text" name="review_name" value="{{information.2}}">
+							<input type="radio" name="grade" value="1">1
+							<input type="radio" name="grade" value="2">2
+							<input type="radio" name="grade" value="3">3
+							<input type="radio" name="grade" value="4">4
+							<input type="radio" name="grade" value="5">5
+							<input name="review" type="textfield" >
+							<input type="submit" value="리뷰 작성">
+						</form>
+					</div>
+
+
+					<div id="res_price"><p>{{information.8}}</p></div>
+					<div id="res_menu">
+						{% for menu in information.9.split %}
+						<p>{{ menu }}</p>
+              			{% endfor %}
+					</div>
+					<div id="res_site"><a href={{information.7}}>웹사이트로 이동</a><div>
+			</div>
+
+			<div id="footer">
+				<a href="../">메인 메뉴로</a>
+				<a href="./">검색창으로</a>
+				<a href="javascript:window.history.back();">이전으로</a>
+
+			</div>
+
+	<script>
+			var is_big = 0;
+
+			function big_map()
+			{
+				if(is_big==0)
+				{
+					is_big = 1;
+					document.getElementById("review").style.position = "absolute";
+					document.getElementById("big_map").innerHTML = "작은화면으로";
+
+				}
+				else
+				{
+					is_big = 0;
+					document.getElementById("review").style.position = "static";
+					document.getElementById("big_map").innerHTML = "전체화면으로";
+				}
+			}
+	</script>
+	</body>
+</html>

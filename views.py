@@ -1,3 +1,5 @@
+'''made by 임경수'''
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from . import Restaurant_Marker
@@ -67,8 +69,8 @@ def menu_search(request):
 
             mapping.restaurant_marker(res[2], latitude, longitude)
         mapping.center_marker()
-        mapping.save_html()
-        print("succes")
+        mapping.save_all_html()
+
         return render(request, 'restaurant_marked_map.html')
 
     return render(request, 'menu_search.html')
@@ -100,14 +102,25 @@ def price_search(request):
 
             mapping.restaurant_marker(res[2], latitude, longitude)
         mapping.center_marker()
-        mapping.save_html()
-        print("succes")
+        mapping.save_all_html()
+
         return render(request, 'restaurant_marked_map.html')
 
-def res_name_search(request):
 
+
+
+def res_name_search(request):
+    if request.method == 'POST' and request.POST.get('review_name', False)!=False:
+        review_name = request.POST.get('review_name', False)
+        grade = request.POST.get('grade', False)
+        review = request.POST.get('review', False)
+
+        print(review_name)
+        print(grade)
+        print(review)
 
     if request.method == 'POST' and request.POST.get('res_name', False)!=False:
+
         search_name = request.POST['res_name']
         filename = 'res_data.csv'
         temp = []
@@ -119,28 +132,12 @@ def res_name_search(request):
                 if search_name in v[2] and v[8] != '':
                     names.append(v)
                     temp.append(v[2])
-
-        if request.method == 'POST' and request.POST.get('to_map', False) != False:
-            mapping = Restaurant_Marker.RestaurantMarker()
-
-            for res in names:
-                print(res[5] + ", " + res[6])
-                latitude = float(res[5])
-                longitude = float(res[6])
-
-                mapping.restaurant_marker(res[2], latitude, longitude)
-            mapping.center_marker()
-            mapping.save_html()
-            print("succes")
-            return render(request, 'restaurant_marked_map.html')
-
-        return render(request, 'results.html', {'results':temp})
+        return render(request, 'results.html', {'results': temp})
 
     if request.method == 'POST' and request.POST.get('to_map', False) != False:
         mapping = Restaurant_Marker.RestaurantMarker()
 
         for res in names:
-
             print(res[5] + ", " + res[6])
             latitude = float(res[5])
             longitude = float(res[6])
@@ -151,6 +148,35 @@ def res_name_search(request):
         print("succes")
         return render(request, 'restaurant_marked_map.html')
 
+
+
+
+
+
+    if request.method == 'POST' and request.POST.get('infor', False) !=False:
+        res_name = request.POST.get('infor', False)
+        filename = 'res_data.csv'
+        with open(filename, 'r') as file:
+            cs_reader = csv.reader(file)
+            lists = list(cs_reader)
+
+
+            for v in lists:
+                if res_name in v[2]:
+                    result = v
+                    break
+
+
+        return render(request, 'information.html', {'information':result})
+
     return render(request, 'res_name_search.html')
 
 
+
+
+
+
+def information(request):
+
+
+    return render(request, 'restaurant_one_map.html')
