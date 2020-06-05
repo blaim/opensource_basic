@@ -1,16 +1,45 @@
 <!--  made by 임경수 -->
 <html>
     <head>
+        <style>
+            #to_server{
+                display:none;
+            }
+        </style>
 
     </head>
     <body>
         <h1>this is akinator</h1>
-        <p>{{yes}}         {{no}}</p>
-        <form method="post">
-            {% csrf_token %}
-            <button name="yes" value="1">YES</button>
-            <button name="no" value="2">NO</button>
-            <button name="reset" value="3">RESET</button>
-        </form>
+        <p id="ph"></p>
+
+
+            <button name="yes" onclick="push_yes()">YES</button>
+            <button name="no" onclick="push_no()">NO</button>
+            <button name="reset" onclick="reset()">RESET</button>
+            <button id="to_server" onclick="alert('server')">to_server</button>
+        <script>
+            yesno = "";
+
+            function push_yes(){
+                yesno += "y";
+                document.getElementById('ph').innerHTML = yesno;
+                if (yesno.length == 6)
+                {
+                    document.getElementById('to_server').style.display = "block";
+                }
+            }
+            function push_no(){
+                yesno += "n";
+                document.getElementById('ph').innerHTML = yesno;
+                if (yesno.length == 6)
+                {
+                    document.getElementById('to_server').style.display = "block";
+                }
+            }
+            function reset(){
+                yesno = "";
+                document.getElementById('ph').innerHTML = yesno;
+            }
+        </script>
     </body>
 </html>

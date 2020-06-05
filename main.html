@@ -1,106 +1,75 @@
 <!--  made by 임경수 -->
 <html>
 <head>
+
 <title>first django project</title>
+	<script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
 	<style>
 			@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 		html{
 			font-family: 'Hanna', sans-serif;
 		}
 		body{
-			background-color:pink;
-			margin:10px;
-		}
-		#header{
-			text-align:center;
-			background-color:#343434;
-			color:#d53bae;
-			font-size:100px;
-			border-bottom:3px dotted black;
-			max-height:40%;
-
-		}
-
-		#menus{
-			float:left;
-			width:100%;
-			height:80%;
-			background-color:#db50b0;
-
-		}
-		ul{
-			height:100%;
-			width:100%;
-			padding:0px;
-		}
-		li{
-			width:90%;
-			height:15%;
-			list-style:none;
-			text-align:center;
-			border:solid 5px black;
-			border-radius:100px;
-			margin:10px auto;
-
-			color:#fff1ac;
-			background-color:#6b48ff;
-
-			}
-		li a{
-			border-radius:25px;
-			width:100%;
-			height:100%;
-			color:yellow;
-			text-decoration:none;
-			font-size:40px;
-			display:block;
-			line-height:100px;
-		}
-		li:hover{
-			background-color:#3d1020;
-			color:#c3f5e1;
-		}
-		#footer{
-			position:fixed;
-			width:100%;
-			overflow:hidden;
-			background-color:#a64942;
-			bottom:0;
-
-		}
-		#footer p{
-			padding:0px 20px;
-			text-align:right;
-
-		}
-
-		#footer button{
-			height:50px;
-			width:50px;
-			position:absolute;
-			bottom:0px;
 			background-color:black;
-			color:yellow;
-			font-size:30px;
-			font-weight:bold;
-
 		}
 
-		#ques_field{
-			width:100%;
-			height:10%;
-			z-index=1;
-			background-color:#5BE7C4;
-			color:#334252;
-			font-size:30px;
-			text-align:center;
-			position:fixed;
-			top:0px;
-			left:0px;
-			display:none;
-			line-height:100px;
+	#header{
+		width:100%;
+		font-size:5vw;
+		text-align:center;
+		color : white;
+		margin-top:50px;
+		margin-bottom:50px;
 		}
 
+	#menus{
+
+		width:100%;
+		height:70%;
+		}
+	#menus li{
+		list-style:none;
+		text-decoration : none;
+		float:left;
+		width:250px;
+		height:400px;
+
+		margin:10px;
+		}
+	#menus li>i{
+			color:white;
+			font-size:200px;
+			position:relative;
+			left:20px;
+		}
+	#menus li>a{
+		display:block;
+		font-size: 40px;
+		text-decoration:none;
+		color:white;
+		width:100%;
+		text-align:center;
+		margin-top:50px;
+		transition: all 0.5s cubic-bezier(0.04, 0.94, 1, 2.01);
+	}
+
+	#menus li>a:hover{
+		color:yellow;
+		transform:scale(1.2);
+	}
+
+
+
+	#footer{
+		position:fixed;
+		bottom:0;
+		}
+	#footer>button{
+		float:left;
+		}
+	#footer>p{
+		float:left;
+		}
 
 	</style>
 
@@ -112,16 +81,26 @@
 		<div id="menus">
 			<ul>
 
-				<li><a href="/akinator" onmouseover = "question(0)"
+				<li>
+					<i class="fas fa-hat-wizard fa-fw"></i>
+					<a href="/akinator" onmouseover = "question(0)"
 					   onmouseout="clears()" >아키네이터</a></li>
-				<li><a href="/ressearch" onmouseover = "question(1)"
+				<li>
+					<i class="fas fa-utensils fa-fw"></i>
+					<a href="/ressearch" onmouseover = "question(1)"
 					   onmouseout="clears()">식당이름검색</a></li>
-				<li><a href="/mnsearch" onmouseover = "question(2)"
+				<li>
+					<i class="fas fa-clipboard-list fa-fw"></i>
+					<a href="/mnsearch" onmouseover = "question(2)"
 					   onmouseout="clears()">식당메뉴검색</a></li>
-				<li><a href="/prsearch" onmouseover = "question(3)"
+				<li>
+					<i class="far fa-money-bill-alt fa-fw"></i>
+					<a href="/prsearch" onmouseover = "question(3)"
 					   onmouseout="clears()">가격대검색</a></li>
-				<li><a href="/add_del" onmouseover = "question(4)"
-					   onmouseout="clears()">식당 추가/ 삭제</a></li>
+				<li>
+					<i class="fas fa-sync fa-spin fa-fw" ></i>
+					<a href="/correction" onmouseover = "question(4)"
+					   onmouseout="clears()">식당정보수정</a></li>
 			</ul>
 			<div id="footer">
 				<button id="ques" onclick="ques_pushed()">?</button>
@@ -133,6 +112,7 @@
 
 	<script>
 		question_pushed = 0;
+
 
 		function ques_pushed(){
 			if(question_pushed == 0)

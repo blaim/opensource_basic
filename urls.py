@@ -18,7 +18,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from . import Restaurant_Marker
 
 urlpatterns = [
     path('', views.main),
@@ -28,5 +27,6 @@ urlpatterns = [
     path('ressearch/', views.res_name_search),
     path('mnsearch/', views.menu_search),
     path('information/', views.information),
+    path('correction/', views.request_correction),
 
 ]

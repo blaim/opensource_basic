@@ -3,6 +3,11 @@
 <head>
     <title>Price result</title>
     <style>
+
+
+
+
+
             @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
             html{
                 width:100%;
@@ -11,26 +16,23 @@
                 scroll-behavior:smooth;
             }
         body{
-            background-color:pink;
+            background-color:black;
         }
         h1{
-            background-color:#F43E71;
+            color:white;
             width:100%;
             height:200px;
             text-align:center;
-            font-size:80px;
+            font-size:6vw;
             line-height:200px;
         }
 
 
-        input[type=button]{
-            width:32%;
-            height:10%;
-            background-color:#d5a4cf;
-            color:#f9bcdd;
-            font-size:30px;
-            margin:100px auto;
-        }
+
+
+
+
+
 
         #move{
 
@@ -64,19 +66,56 @@
         }
 
         #rests button{
-        background-color:blue;
-            color:yellow;
-            font-size:30px;
+            background-color:white;
+            color:black;
+            font-size:4vw;
             margin:10px auto;
             text-align:center;
             width:100%;
             height:100px;
             line-height:100px;
+            transform: skew(20deg);
+            border-left:20px solid yellow;
+            border-right:20px solid yellow;
+            transition:all 0.3s;
         }
 
-        button{
-            background-color:red;
+        #rests button:hover{
+            transform : scale(1.1);
         }
+
+        #to_map{
+            margin-top:200px;
+        }
+
+        #map{
+            float:left;
+            width:25%;
+            height:70px;
+            font-size:2vw;
+            margin:10px;
+            transition:all 0.3s;
+        }
+
+        #map:hover{
+            transform : scale(1.3);
+        }
+
+        body>button{
+            float:left;
+            width:25%;
+            height:70px;
+            margin-top:200px;
+            margin:10px;
+            font-size:2vw;
+            transition : all 0.3s;
+        }
+
+        body>button:hover{
+            transform : scale(1.3);
+        }
+
+
 
     </style>
 
@@ -87,16 +126,17 @@
         {% csrf_token %}
     {% for p in results %}
 
-    <button name="infor" value="{{p}}">{{p}}</button>
+    <button name="infor" class="buttons" value="{{p}}">{{p}}</button>
 
     {% endfor %}
     </form>
 
-    <form method="post">
+
+    <form method="post" id="to_map">
         {% csrf_token %}
         <button id="map" name="to_map" value="map" >지도로 출력</button>
     </form>
-    <button  onclick="location.href='./'">식당이름 다시검색</button>
+    <button  onclick="location.href='./'">다시검색</button>
     <button  onclick="location.href='../'">메인 메뉴로</button>
     <div id="move">
         <button id="to_up"><a href="#top">▲</a></button>
