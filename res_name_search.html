@@ -84,15 +84,17 @@
             }
 
             #footer{
-			position:fixed;
 			width:100%;
-			background-color:#a64942;
 			bottom:0;
+            text-align:center;
 		}
-		#footer p{
-			padding:0px 20px;
-			text-align:right;
-			text
+		#footer a{
+			color:white;
+			text-decoration:none;
+			font-size:50px;
+		}
+		#footer a:hover{
+		    color:yellow;
 		}
 
         </style>
@@ -106,13 +108,13 @@
                 <p>검색할 식당의 이름을 입력하세요.</p>
                 <div id="inputs">
                 <input type="text" name="res_name" placeholder="식당 이름">
-                <input type="submit">
+                <input type="submit" value="검색">
                 </div>
             </form>
 
         </div>
         <div id="footer">
-            <p>CBNU opensource</p>
+            <a href="../">메인메뉴로</a>
         </div>
     </body>
 </html>
