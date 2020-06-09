@@ -4,20 +4,22 @@
 
 <title>first django project</title>
 	<script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	<style>
-			@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
 		html{
-			font-family: 'Hanna', sans-serif;
+			font-family: 'Jua', sans-serif;
 		}
 		body{
-			background-color:black;
+			background-color:grey;
+			padding:0px;
 		}
 
 	#header{
 		width:100%;
 		font-size:5vw;
 		text-align:center;
-		color : white;
+		color : black;
 		margin-top:50px;
 		margin-bottom:50px;
 		}
@@ -26,7 +28,8 @@
 
 		width:100%;
 		height:70%;
-
+		padding:0px;
+		margin:0px;
 		}
 	#menus li{
 		list-style:none;
@@ -35,11 +38,11 @@
 		width:250px;
 		height:400px;
 
-		margin:30px 20px;
+		margin:50px 20px;
 
 		}
 	#menus li>i{
-			color:white;
+			color:black;
 			font-size:200px;
 			position:relative;
 			left:9px;
@@ -48,7 +51,7 @@
 		display:block;
 		font-size: 40px;
 		text-decoration:none;
-		color:white;
+		color:black;
 		width:100%;
 		text-align:center;
 		margin-top:50px;
@@ -104,65 +107,11 @@
 					<a href="/correction" onmouseover = "question(4)"
 					   onmouseout="clears()">식당정보수정</a></li>
 			</ul>
-			<div id="footer">
-				<button id="ques" onclick="ques_pushed()">?</button>
-				<p>CBNU opensource</p>
-			</div>
+
 		</div>
 
 
 
-	<script>
-		question_pushed = 0;
 
-
-		function ques_pushed(){
-			if(question_pushed == 0)
-			{
-				document.getElementById("ques").style.backgroundColor="blue";
-				question_pushed = 1;
-			}
-			else
-			{
-				document.getElementById("ques").style.backgroundColor="black";
-				question_pushed = 0;
-			}
-		}
-
-
-
-		function question(number){
-			if(question_pushed == 1)
-			{
-			document.getElementById("ques_field").style.display="block";
-
-			if(number == 0)
-			{
-			document.getElementById("ques_field").innerHTML = "질문을 통해 원하는 식당을 출력합니다";
-			}
-			else if(number == 1)
-			{
-			document.getElementById("ques_field").innerHTML = "식당의 이름을 입력받아 검색합니다";
-			}
-			else if(number == 2)
-			{
-			document.getElementById("ques_field").innerHTML = "찾고싶은 메뉴를 입력받아 검색합니다";
-			}
-			else if(number == 3)
-			{
-			document.getElementById("ques_field").innerHTML = "원하는 식당의 평균 가격대를 검색합니다";
-			}
-			else if(number == 4)
-			{
-			document.getElementById("ques_field").innerHTML = "수정이 필요한 식당을 관리자에게 전송합니다다";			}
-
-			}
-		}
-
-		function clears(){
-				document.getElementById("ques_field").style.display="none";
-		}
-
-	</script>
 	</body>
 </html>

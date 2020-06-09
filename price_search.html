@@ -1,11 +1,18 @@
+<!--  made by 임경수 -->
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
         <style>
-            @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+            *{
+                margin:0;
+                padding:0;
+            }
             html{
                 width:100%;
                 height:100%;
-                font-family: 'Hanna', sans-serif;
+
+                font-family: 'Jua', sans-serif;
+                background-color:grey;
             }
             body{
                 height:100%;
@@ -13,76 +20,71 @@
                 display:flex;
                 flex-direction:column;
                 align-items:center;
-                background-color : black;
 
+                border-style:none;
             }
+
             h1{
                 text-align:center;
-                font-size:100px;
-                color:white;
-            }
-            #main{
-                position:relative;
-                width : 70%;
-                height : 50%;
+                font-size:5vw;
+                margin-bottom:15%;
+                border: solid 5px black;
+                }
 
-            }
-            form p{
-                text-align:center;
-                font-size:30px;
-                color:yellow;
-                border-radius:30px;
-                color:white;
-                width:70%;
-            }
-            form{
-                position:absolute;
-                width:60%;
-                height:70%;
-                top:15%;
-                left:20%;
-
-            }
-            #inputs{
-                position:absolute;
-                left:10%;
-            }
             input[type=text]{
-
-                width:50%;
-                height:30%;
-                font-size:70px;
-                border:5px solid black;
-                transition:background-color 1s, border 1s;
+                font-family: 'Jua', sans-serif;
+                width:60%;
+                height:20%;
+                left:5%;
+                position:relative;
+                display:block;
+                font-size:30px;
+                text-align:center;
+                border: solid 5px black;
+                transition: all 0.3s;
+                float:left;
             }
+
+            input[type=text]:focus{
+                background-color:black;
+                color:white;
+            }
+
+
+
             input[type=submit]{
-                background-color:white;
-                color:black;
-                width:100px;
-                height:50px;
-            }
+                font-family: 'Jua', sans-serif;
+                width:20%;
+                height:40%;
 
+                left:5%;
+                position:relative;
+                background-color:white;
+                font-size:30px;
+
+            }
             input[type=submit]:hover{
                 background-color:black;
                 color:white;
             }
 
-            input[type=text]:focus{
-                background-color:grey;
-
+            #main{
+                background-color:white;
+                width:70%;
+                height:70%;
+                margin-top:5%;
             }
 
-
-
          #footer{
-			width:100%;
-			bottom:0;
-            text-align:center;
-		}
+            position:fixed;
+            bottom:0;
+            }
+
 		#footer a{
 			color:white;
 			text-decoration:none;
 			font-size:50px;
+
 		}
 		#footer a:hover{
 		    color:yellow;
@@ -92,17 +94,20 @@
 
     </head>
     <body>
-        <h1>가격대 검색</h1>
+
         <div id = "main">
-            <form action="#" method="post">
+            <h1>가격대 검색</h1>
+            <form action="#" method="post" autocomplete="off">
                 {% csrf_token %}
-                <p>검색할 식당의 가격 범위를 입력하세요</p>
+
                 <div id="inputs">
-                <input type="text" name="min_number" placeholder="최소가격" autocomplete="off">
-                <input type="text" name="max_number" placeholder="최대가격" autocomplete="off">
-                <input type="submit">
+                <input id="min" type="text" name="min_number" placeholder="최소 가격">
+
+                <input id="max" type="text" name="max_number" placeholder="최대 가격">
+                <input type="submit" value="검색">
                 </div>
             </form>
+
         </div>
         <div id="footer">
             <a href="../">메인메뉴로</a>
