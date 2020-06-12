@@ -1,6 +1,9 @@
 <!--  made by 임경수 -->
 <html>
 <head>
+    <title>results</title>
+    <script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
     <title>Price result</title>
@@ -25,7 +28,7 @@
 
             height:200px;
             text-align:center;
-            font-size:6vw;
+            font-size:6vmax;
             line-height:200px;
             border-top:solid 5px black;
             border-bottom:solid 5px black;
@@ -68,17 +71,17 @@
             border-left:solid 5px black;
             border-right:solid 5px black;
             background-color:white;
-            width:50%;
+            width:70%;
             padding-bottom:100px;
             margin-top:50px;
             position:relative;
-            left:25%;
+            left:15%;
         }
 
         #rests button{
             background-color:black;
             color:white;
-            font-size:3vw;
+            font-size:3vmax;
             margin:10px auto;
             text-align:center;
             width:100%;
@@ -101,9 +104,9 @@
 
         #map{
             float:left;
-            width:25%;
+            width:20%;
             height:70px;
-            font-size:2vw;
+            font-size:2vmax;
             margin:10px;
             transition:all 0.3s;
             border:solid 3px black;
@@ -116,11 +119,11 @@
 
         body>button{
             float:left;
-            width:25%;
+            width:20%;
             height:70px;
             margin-top:200px;
             margin:10px;
-            font-size:2vw;
+            font-size:2vmax;
             transition : all 0.3s;
             border:solid 3px black;
             font-family: 'Jua', sans-serif;
@@ -137,7 +140,7 @@
 </head>
 <body>
     <div id="infor_box">
-    <h1 id="top">식당 리스트</h1>
+    <h1 id="top"><i class="fas fa-list"></i>  식당 리스트</h1>
     <form id="rests" method="post">
         {% csrf_token %}
     {% for p in results %}

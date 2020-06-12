@@ -1,46 +1,352 @@
-<!--  made by 임경수 -->
-<!-- 밥키네이터 기본적인 동작 구현하기위해 생성한 테스트코드 -->
 <html>
     <head>
+        <title>babkinator</title>
+        <script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
         <style>
+            *{
+                margin:0px;
+                padding:0px;
+            }
+            html{
+                font-family: 'Jua', sans-serif;
+            }
+            body{
+
+                background-color:grey;
+            }
+            h1{
+                background-color:white;
+                border:solid black 5px;
+                text-align:center;
+                width:50%;
+                font-size:5vmax;
+                position:relative;
+                left:25%;
+                margin-bottom:30px;
+            }
             #to_server{
                 display:none;
+                width:100%;
+                height:15%;
             }
+
+            #main_box{
+                background-color:white;
+                position:relative;
+                left:15%;
+                width:70%;
+                height:65%;
+                padding-top:30px;
+            }
+
+            #babkinator_box{
+                border:solid black 10px;
+                position:relative;
+                left:10%;
+                width:80%;
+                height:60%;
+                display:table;
+            }
+
+            #question{
+                display:table-cell;
+                vertical-align:middle;
+                font-size:3vmax;
+                text-align:center;
+
+            }
+
+            .nor_bt{
+                margin:0px;
+                margin-top:10px;
+                font-family: 'Jua', sans-serif;
+                font-size:4vmax;
+                width:32.9%;
+                height:20%;
+                background-color:white;
+                color:black;
+                border:solid 5px black;
+
+            }
+
+            .nor_bt:hover{
+                background-color:black;
+                color:white;
+            }
+
+
+
+            #code{
+                display:none;
+            }
+
+            #to_main{
+                width:100%;
+                text-align:center;
+                text-decoration:none;
+            }
+
+            #footer{
+            position:fixed;
+            width:100%;
+            bottom:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            }
+
+		#footer a{
+
+			color:white;
+			text-decoration:none;
+			font-size:50px;
+			text-align:center;
+
+		}
+		#footer a:hover{
+		    color:yellow;
+		}
         </style>
 
     </head>
     <body>
-        <h1>this is akinator</h1>
-        <p id="ph"></p>
+        <h1><i class="fas fa-hat-wizard fa-fw"></i>  밥키네이터</h1>
+        <div id="main_box">
+            <div id="babkinator_box">
+        <div id="question"></div>
+            </div>
+            <button class="nor_bt" name="yes" onclick="push_yes()">YES</button>
+            <button class="nor_bt" name="no" onclick="push_no()">NO</button>
+            <button class="nor_bt" name="reset" onclick="reset()">RESET</button>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <p id="code"></p>
+                <button class="nor_bt" name="babkinator_code" id="to_server" >to_server</button>
+            </form>
 
-
-            <button name="yes" onclick="push_yes()">YES</button>
-            <button name="no" onclick="push_no()">NO</button>
-            <button name="reset" onclick="reset()">RESET</button>
-            <button id="to_server" onclick="alert('server')">to_server</button>
+        </div>
+        <div id="footer">
+            <a href="../">메인메뉴로</a>
+        </div>
         <script>
-            yesno = "";
+            // 2019029029 황근민
+            // 반복되는 질문을 제시 및 답변누적
 
-            function push_yes(){
-                yesno += "y";
-                document.getElementById('ph').innerHTML = yesno;
-                if (yesno.length == 6)
+            // 답변을 저장할 변수를 전역 변수로 선언
+            var food_code = "";
+
+            // 버튼 Yes를 클릭했을 떄 호출할 함수
+            function push_yes()
+            {
+                // 답변 저장하는 변수에 y를 누적
+                food_code += "y";
+                document.getElementById('code').innerHTML = food_code;
+
+                // 새로 누적된 답변을 인자로 새로운 질문 호출
+                babkinator(food_code);
+            }
+
+            // 버튼 No를 클릭했을 때 호출할 함수
+            function push_no()
+            {
+                // 답변을 저장하는 변수에 n를 누적
+                food_code += "n";
+                document.getElementById('code').innerHTML = food_code;
+
+                // 새로 누적된 답변을 인자로 새로운 질문 호출
+                babkinator(food_code);
+            }
+
+            // reset 버튼을 클릭했을 때 호출할 함수
+            function reset()
+            {
+                // 누적된 답변을 초기화
+                food_code = "";
+                document.getElementById('code').innerHTML = food_code;
+                document.getElementById('to_server').style.display="none";
+                // 초기화된 답변으로 질문 호출
+                babkinator(food_code);
+            }
+
+            // 사용자에 답변을 인수로 받아 질문 출력하는 함수
+            function babkinator(food_code)
+            {
+                // 0단계~7단계 질문 배열 통해서 선언
+                var Q0 = ["식사 혹은 간식입니까?(음료 및 후식 제외)"];
+                var Q1 = ["고기입니까?","술의 종류입니까?"];
+                var Q2 = ["익혀 먹는 음식입니까?", "매운 음식입니까?", "커피의 종류인가요?"];
+                var Q3 = ["매운 음식입니까?", "해산물이 들어가는 음식입니까?", "면이 들어가는 음식입니까?"];
+                var Q4 = ["해산물이 들어가는 음식입니까?", "쌀이 들어가거나 밥과 함께 먹는 음식입니까?"];
+                var Q5 = ["닭이 들어가는 음식입니까?"];
+                var Q6 = ["돼지고기가 들어가는 음식입니까?"];
+                var Q7 = ["튀겨서 먹나요?"];
+                var result = "to_server를 클릭해 제출해주세요.";
+
+                // 0단계 질문
+                if(food_code.length == 0)
+                    document.getElementById('question').innerHTML = Q0[0];
+
+                // 1단계 질문
+                else if(food_code.length == 1)
                 {
-                    document.getElementById('to_server').style.display = "block";
+
+                    // 식사o
+                    if(food_code == "y")
+                        //고기o/x
+                        document.getElementById('question').innerHTML = Q1[0];
+
+                    if(food_code == "n")
+                        //술의 종류o/x
+                        document.getElementById('question').innerHTML = Q1[1];
+                }
+
+                // 2단계 질문
+                else if(food_code.length == 2)
+                {
+                    // 식사o, 고기o
+                    if(food_code == "yy")
+                        // 익혀서 먹음o/x
+                        document.getElementById('question').innerHTML = Q2[0];
+                    // 실사o, 고기x
+                    else if(food_code == "yn")
+                        // 매운 음식o/x
+                        document.getElementById('question').innerHTML = Q2[1];
+                    // 식사x, 술의 종류o
+                    else if(food_code == "ny"){
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                        }
+                    // 식사x, 술의 종류x
+                    else if(food_code == "nn")
+                        //커피의 종류o/x
+                        document.getElementById('question').innerHTML = Q2[2];
+                }
+
+                // 3단계 질문
+                else if(food_code.length == 3)
+                {
+                    // 식사o, 고기o, 익혀서 먹음o
+                    if(food_code == "yyy")
+                        // 매운 음식o/x
+                        document.getElementById('question').innerHTML = Q3[0];
+                    // 식사o, 고기x, 익혀서 먹음x
+                    else if(food_code == "yyn")
+                        //해산물 o/x
+                        document.getElementById('question').innerHTML = Q3[1];
+                    // 식사o, 고기x, 매움o 또는 식사o, 고기x, 매움x
+                    else if(food_code == "yny" || food_code == "ynn")
+                        //면이 들어가는 음식o/x
+                        document.getElementById('question').innerHTML = Q3[2];
+                    // 식사x, 술의 종류x, 커피의 종류o 또는 식사x, 술의 종류x, 커피의 종류x
+                    else if(food_code == "nny" || food_code == "nnn"){
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                        }
+                 }
+
+                // 4단계 질문
+                else if(food_code.length == 4)
+                {
+                    // 식사류o, 고기o, 익혀서 먹음o, 매움o 또는 식사류o, 고기o, 익혀서 먹음o, 매움x
+                    if(food_code == "yyyy" || food_code == "yyyn")
+                        // 해산물o/x
+                        document.getElementById('question').innerHTML = Q4[0];
+
+                    // 식사류o, 고기o, 익혀서 먹음x, 해산물o
+                    else if(food_code == "yyny")
+                        // 쌀o/x
+                        document.getElementById('question').innerHTML = Q4[1];
+
+                    // 식사류o, 고기o, 익혀서 먹음x, 해산물x 또는 식사류o, 고기x, 매움o, 면o 또는 식사류o, 고기x, 매움x, 면o
+                    else if(food_code == "yynn" || food_code == "ynyy" || food_code == "ynny")
+                        {
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                        }
+                    // 식사류o, 고기x, 매움o, 면x 또는 식사류o, 고기x, 매움x, 면x
+                    else if(food_code == "ynyn" || food_code == "ynnn")
+                        // 밥o/x
+                        document.getElementById('question').innerHTML = Q4[1];
+                 }
+
+                // 5단계 질문
+                else if(food_code.length == 5)
+                {
+                    /*
+                    식사류o, 고기o, 익혀서 먹음o, 매움o, 해산물o 또는 식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물o
+                    또는 식사류 o, 고기o, 익혀서 먹음x, 해산물o, 쌀o 또는 식사류 o, 고기o, 익혀서 먹음x, 해산물o, 쌀x
+                    또는 식사류o, 고기x, 매움o, 면x, 밥o 또는 식사류o, 고기x, 매움o, 면x, 밥x,
+                    또는 식사류o, 고기x, 매움x, 면x, 밥o 또는 식사류o, 고기x, 매움x, 면x, 밥x
+                    */
+                     if(food_code == "yyyyy" || food_code == "yyyny" ||
+                     food_code == "yynyy" || food_code == "yynyn" ||
+                     food_code == "ynyny" || food_code == "ynynn" ||
+                     food_code == "ynnny" || food_code == "ynnnn")
+                     {
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                     }
+
+                     // 식사류o, 고기o, 익혀서 먹음o, 매움o, 해산물x 또는 식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x
+                     else if(food_code == "yyyyn" || food_code == "yyynn")
+                        document.getElementById('question').innerHTML = Q5[0];
+
+                }
+
+
+                // 6단계 질문
+                else if(food_code.length == 6)
+                {
+                    /*
+                    식사류o, 고기o, 익혀서 먹음o, 매움o, 해산물x, 닭o 또는 식사류o, 고기o, 익혀서 먹음o, 매움o, 해산물x, 닭x
+                    또는 식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭o
+                    */
+                    if(food_code == "yyyyny" || food_code == "yyyynn"
+                    || food_code == "yyynny")
+                    {
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                    }
+                    //식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭x
+                    else if(food_code == "yyynnn")
+                        //돼지고기o/x
+                        document.getElementById('question').innerHTML = Q6[0];
+                }
+
+                // 7단계 질문
+                else if(food_code.length == 7)
+                {
+                    //식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭x, 돼지고기o
+                    if(food_code == "yyynnny")
+                        //튀김o/x
+                        document.getElementById('question').innerHTML = Q7[0];
+                    //식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭x, 돼지고기x
+                    else if(food_code == "yyynnnn")
+                    {
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                    }
+                }
+
+                // 8단계 질문
+                else if(food_code.length == 8)
+                {
+                    /*
+                    식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭x, 돼지고기o, 튀김o
+                    또는 //식사류o, 고기o, 익혀서 먹음o, 매움x, 해산물x, 닭x, 돼지고기o, 튀김x
+                    */
+                    if(food_code == "yyynnnyy" || food_code == "yyynnnyn")
+                    {
+                        document.getElementById('to_server').style.display = "block";
+                        document.getElementById('question').innerHTML = result;
+                    }
                 }
             }
-            function push_no(){
-                yesno += "n";
-                document.getElementById('ph').innerHTML = yesno;
-                if (yesno.length == 6)
-                {
-                    document.getElementById('to_server').style.display = "block";
-                }
-            }
-            function reset(){
-                yesno = "";
-                document.getElementById('ph').innerHTML = yesno;
-            }
+
+            // 처음 시작할 떄 0단계 질문 출력을 위해서 질문 함수 호출
+            babkinator(food_code);
+
         </script>
     </body>
 </html>

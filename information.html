@@ -1,13 +1,20 @@
 <!--  made by 임경수 -->
 <html>
 	<head>
+		<title>information</title>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
 			<style>
 					*{
 						padding:0px;
 						margin:0px;
 						font-family: 'Jua', sans-serif;
+					}
+					html
+					{
+						-webkit-text-size-adjust: auto;
+
 					}
 					body{
 
@@ -18,7 +25,7 @@
 					}
 					#mainbox{
 							justify-content:center;
-							width:90%;
+							width:87%;
 							height:90%;
 							display:grid;
 							background-color:grey;
@@ -28,6 +35,8 @@
 							grid-gap:10px;
 							overflow:hidden;
 							padding:20px;
+
+
 					}
 					div>div{
 						background-color : white;
@@ -38,7 +47,7 @@
 
 					#res_name{
 						grid-column-start:1;
-						grid-column-end:5;
+						grid-column-end:4;
 
 					}
 
@@ -46,36 +55,39 @@
 
 						width:100%;
 						height:100%;
-						font-size:4vw;
+						font-size:5vmax;
 						font-weight:bold;
-						line-height:100px;
+
+
 					}
 
 					#phone{
-						grid-column-start:5;
+						grid-column-start:4;
 						grid-column-end:7;
+
 					}
 					#phone p{
 
-						font-size:3vw;
+						font-size:5vmax;
 						font-weight:bold;
-						line-height:100px;
+
+
 					}
 
 					#grade{
 						grid-column-start:1;
-						grid-column-end:6;
+						grid-column-end:4;
 						grid-row-start:2;
 						grid-row-end:3;
 					}
 					#review_show{
 						grid-column-start:1;
-						grid-column-end:4;
+						grid-column-end:3;
 						grid-row-start:3;
 						grid-row-end:6;
 						position:relative;
-						width:100%;
-						height:100%;
+						width:95%;
+						height:95%;
 						overflow:hidden;
 					}
 
@@ -85,35 +97,37 @@
 
 					}
 					#review_show div h1{
-						font-size:40px;
+						font-size:5vmax;
 					}
 					#review_show div p
 					{
-						font-size:20px;
+						font-size:3vmax;
 					}
 
 					#write_review
 					{
-						grid-column-start:4;
+						grid-column-start:3;
 						grid-column-end:6;
 						grid-row-start:3;
 						grid-row-end:6;
-
+						overflow:hidden;
 					}
 
 
 
 					#res_price{
-						grid-column-start:6;
+						grid-column-start:4;
 						grid-column-end:7;
 						grid-row-start:2;
 						grid-row-end:3;
+
 					}
 
 					#res_price p {
-						font-size:3vw;
+						font-size:5vmax;
 						font-weight:bold;
-						line-height:100px;
+
+
 					}
 
 					#res_menu{
@@ -128,8 +142,8 @@
 					#res_menu p{
 						background-color:#dadada;
 						width:100%;
-						height:15%;
-						font-size:2vw;
+
+						font-size:2vmax;
 						border-bottom:4px black solid;
 
 					}
@@ -146,7 +160,7 @@
 						text-decoration:none;
 						width:100%;
 						height:100%;
-						font-size:5vw;
+						font-size:5vmax;
 						color:black;
 						display:block;
 
@@ -173,8 +187,9 @@
 
 		#write_review form{
 			width:80%;
-			height:80%;
+			height:70%;
 			margin:0px auto;
+
 		}
 
 		textarea{
@@ -185,6 +200,8 @@
 			font-size:20px;
 		}
 
+
+
 		input[type=submit]{
 			width:100%;
 			height:40px;
@@ -193,12 +210,12 @@
 		input[type=text]{
 			display:none;
 		}
-		.fa{
-			font-size:6vw;
+		#grade .fa{
+			font-size:6vmax;
 		}
-		.checked{
+		#grade .checked{
 			color:orange;
-			font-size:6vw;
+			font-size:6vmax;
 			}
 
 
@@ -234,17 +251,12 @@
 
 
 
-
-
-
-
-
 			</style>
 	</head>
 	<body>
 			<div id="mainbox">
 					<div id="res_name"><p>{{information.2}}</p></div>
-					<div id="phone"><p>{{information.4}}</p></div>
+					<div id="phone"><p>{{information.4}} <i class="fa fa-phone"></i></p></div>
 					<div id="grade">
 						<p id="ave_grade">{{information.10}}</p>
 						<span id="one_star" class="fa fa-star checked"></span>
@@ -294,7 +306,7 @@
 					</div>
 
 
-					<div id="res_price"><p>{{information.8}}</p></div>
+					<div id="res_price"><p>{{information.8}}<i class="fa fa-money"></i></p></div>
 					<div id="res_menu">
 						{% for menu in information.9.split %}
 						<p>{{ menu }}</p>
@@ -306,7 +318,7 @@
 			<div id="footer">
 
 				<button onclick="location.href='../'">메인메뉴로</button>
-				<button onclick="location.href='./'">검색창으로</button>
+				<button onclick="location.href='./'">다시검색</button>
 				<button onclick="location.href='javascript:window.history.back()'">이전화면으로</button>
 			</div>
 

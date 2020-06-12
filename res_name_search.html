@@ -1,7 +1,10 @@
 <!--  made by 임경수 -->
 <html>
     <head>
+        <title>restaurant name</title>
+        <script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
         <style>
             *{
                 margin:0;
@@ -26,15 +29,19 @@
 
             h1{
                 text-align:center;
-                font-size:5vw;
+                font-size:5vmax;
                 margin-bottom:15%;
                 border: solid 5px black;
                 }
+            .fas{
+                font-size:5vmax;
+                color:black;
+            }
 
             input[type=text]{
                 font-family: 'Jua', sans-serif;
                 width:90%;
-                height:20%;
+                height:30%;
                 left:5%;
                 position:relative;
                 display:block;
@@ -90,7 +97,7 @@
     <body>
 
         <div id = "main">
-            <h1>식당 이름 검색</h1>
+            <h1><i class="fas fa-utensils"></i>  식당 이름 검색</h1>
             <form action="#" method="post" autocomplete="off">
                 {% csrf_token %}
 

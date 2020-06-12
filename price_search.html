@@ -1,7 +1,11 @@
 <!--  made by 임경수 -->
 <html>
+
     <head>
+        <title>price search</title>
+        <script src="https://kit.fontawesome.com/eb782002a4.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=no, target-densitydpi=medium-dpi" />
         <style>
             *{
                 margin:0;
@@ -20,13 +24,12 @@
                 display:flex;
                 flex-direction:column;
                 align-items:center;
-
                 border-style:none;
             }
 
             h1{
                 text-align:center;
-                font-size:5vw;
+                font-size:5vmax;
                 margin-bottom:15%;
                 border: solid 5px black;
                 }
@@ -54,7 +57,7 @@
 
             input[type=submit]{
                 font-family: 'Jua', sans-serif;
-                width:20%;
+                width:30%;
                 height:40%;
 
                 left:5%;
@@ -96,7 +99,7 @@
     <body>
 
         <div id = "main">
-            <h1>가격대 검색</h1>
+            <h1><i class="far fa-money-bill-alt fa-fw"></i>  가격대 검색</h1>
             <form action="#" method="post" autocomplete="off">
                 {% csrf_token %}
 
