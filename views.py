@@ -8,7 +8,7 @@ from . import GraphMake
 from . import board_add
 from datetime import datetime
 from . import review_add
-
+from . import Babkinator_file
 
 #기본 메뉴 출력
 def main(request):
@@ -30,6 +30,19 @@ def akinator(request):
             yes_num=0
             no_num=0
         render(request, 'akinator.html', {'yes':yes_num, 'no':no_num})
+
+    if request.method == 'POST' and request.POST.get('babkinator_code', False) !=False:
+        bab_code = request.POST.get('babkinator_code', False)
+
+        bab_class = Babkinator_file.Bapkinator()
+        bab_class.open_csv()
+        chosen_food = bab_class.make_food_list(bab_code)
+
+
+        return render(request, 'results.html', {'results': chosen_food})
+
+
+
 
     return render(request, 'akinator.html', {'yes':yes_num, 'no':no_num})
 
