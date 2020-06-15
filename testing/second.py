@@ -1,3 +1,5 @@
+#임경수  pyqt5 이용한 테스트 어플리케이션 제작에서 사용. 웹 어플리케이션 사용 후에는 사용하지 않음
+
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
