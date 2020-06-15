@@ -19,6 +19,9 @@ def main(request):
 def akinator(request):
     yes_num = 0
     no_num = 0;
+    filename = 'res_data.csv'
+    names = []
+    temp = []
     if request.method == 'POST':
         if request.POST.get('yes', ''):
             print(request.POST.get('yes', ''))
@@ -31,20 +34,73 @@ def akinator(request):
             no_num=0
         render(request, 'akinator.html', {'yes':yes_num, 'no':no_num})
 
-    if request.method == 'POST' and request.POST.get('babkinator_code', False) !=False:
+    if request.method == 'POST' and request.POST.get('babkinator', False) !=False:
         bab_code = request.POST.get('babkinator_code', False)
 
         bab_class = Babkinator_file.Bapkinator()
         bab_class.open_csv()
+        mapping = Restaurant_Marker.RestaurantMarker()
         chosen_food = bab_class.make_food_list(bab_code)
+        with open(filename, 'r') as file:
+            cs_reader = csv.reader(file)
+            lists = list(cs_reader)
+            for menu_name in chosen_food:
+                for v in lists:
+                    if menu_name in v[9]:
+                        temp.append(v[2])
+                        names.append(v)
+
+            for res in names:
+                print(res[5] + ", " + res[6])
+                latitude = float(res[5])
+                longitude = float(res[6])
+
+                mapping.restaurant_marker(res[2], latitude, longitude)
+
+            mapping.center_marker()
+            mapping.save_html()
+
+        return render(request, 'results.html', {'results': temp})
+
+    if request.method == 'POST' and request.POST.get('infor', False) !=False:
+        res_name = request.POST.get('infor', False)
+        filename = 'res_data.csv'
+
+        with open(filename, 'r') as file:
+            cs_reader = csv.reader(file)
+            lists = list(cs_reader)
 
 
-        return render(request, 'results.html', {'results': chosen_food})
+            for v in lists:
+                if res_name in v[2]:
+                    result = v
+                    break
 
 
 
+
+        return render(request, 'information.html', {'information':result})
+
+    #리뷰, 평점 추가
+    if request.method == 'POST' and request.POST.get('review_name', False) != False:
+        review_name = request.POST.get('review_name', False)
+        grade = request.POST.get('grade', False)
+        review = request.POST.get('review', False)
+
+        add_review = review_add.review()
+        add_review.reviewAdd(int(review_name), int(grade), review)
+        print(review_name)
+        print(grade)
+        print(review)
+
+    # 지도데이터 화면에 출력
+    if request.method == 'POST' and request.POST.get('to_map', False) != False:
+        return render(request, 'restaurant_marked_map.html')
 
     return render(request, 'akinator.html', {'yes':yes_num, 'no':no_num})
+
+
+
 
 #메뉴 검색하는 페이지
 def menu_search(request):
@@ -62,7 +118,7 @@ def menu_search(request):
                     temp.append(v[2])
 
         mapping = Restaurant_Marker.RestaurantMarker()
-        #test_graph = GraphMake.GraphMake()
+
 
         for res in names:
             print(res[5] + ", " + res[6])
@@ -70,10 +126,10 @@ def menu_search(request):
             longitude = float(res[6])
 
             mapping.restaurant_marker(res[2], latitude, longitude)
-            #test_graph.Add(res[2], int(res[8]))
 
 
-        #test_graph.Graph('graph');
+
+
 
         mapping.center_marker()
         mapping.save_html()
@@ -119,9 +175,10 @@ def price_search(request):
             cs_reader = csv.reader(file)
             lists = list(cs_reader)
             for v in lists:
-                if v[8] >= min_number and v[8] <= max_number:
-                    names.append(v)
-                    temp.append(v[2])
+                if('0' in v[8]):
+                    if int(v[8]) >= int(min_number) and int(v[8]) <= int(max_number):
+                        names.append(v)
+                        temp.append(v[2])
 
         mapping = Restaurant_Marker.RestaurantMarker()
 
@@ -162,6 +219,8 @@ def price_search(request):
     return render(request, 'price_search.html')
 
 
+
+
 #식당이름 검색하는 페이지
 def res_name_search(request):
     #리뷰, 평점 추가
@@ -176,7 +235,7 @@ def res_name_search(request):
         print(grade)
         print(review)
 
-
+    #식당이름 검색
     if request.method == 'POST' and request.POST.get('res_name', False)!=False:
 
         search_name = request.POST['res_name']
@@ -230,6 +289,8 @@ def res_name_search(request):
         return render(request, 'information.html', {'information':result})
 
     return render(request, 'res_name_search.html')
+
+
 
 #변경할 내용 보내는 기능
 def request_correction(request):
